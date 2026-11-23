@@ -14,7 +14,7 @@ Early warning signs and support using Apple Watch, iPhone Health and AI
 
 **Why we built nafsi**
 
-Our junior project looked at anxiety and eating disorders and showed that the two are closely linked. When people are stressed, the way they eat often changes: some skip meals, some overeat, and some start to control food strictly.
+Our senior project looked at anxiety and eating disorders and showed that the two are closely linked. When people are stressed, the way they eat often changes: some skip meals, some overeat, and some start to control food strictly.
 
 Most people only notice these signs late. Students in the UAE also lack one simple tool that checks both problems together and points them to help early.
 
