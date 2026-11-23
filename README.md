@@ -1,80 +1,66 @@
-# nafsi
+nafsi
+Monitoring stress and eating habits: early warning signs and support through Apple Watch, iPhone Health and AI
 
-**Stress & Eating-Habits Monitoring App**
-Early warning signs and support using Apple Watch, iPhone Health and AI
+Senior Design Group: Noorah Alshamsi, Mariam Mohammed Binsuwaif, Hend Abdellatif
+Supervisor: Ibrahim Abaker Hashem | Mentor: Manar Abu Talib
+Examination Committee: Prof. Ashraf Elnagar, Dr. Huseyin Kusetogullari, Dr. Isam Al Jawarneh
+College of Computing and Informatics, Department of Computer Science, University of Sharjah
 
-**Senior Design Group:** Noorah Alshamsi, Mariam Mohammed Binsuwaif, Hend Abdellatif
-**Supervisor:** Ibrahim Abaker Hashem, **Mentor:** Manar Abu Talib
-**Examination Committee:** Prof. Ashraf Elnagar, Dr. Huseyin Kusetogullari, Dr. Isam Al Jawarneh
-**Affiliation:** College of Computing and Informatics, Department of Computer Science, University of Sharjah
+Problem statement
+The reason behind nafsi
 
----
+We studied anxiety and eating disorders for our senior project and found a strong connection between them. Stress often changes how people eat. Some people stop eating meals, some eat too much, and others start to tightly control their food.
 
-## Problem Statement
+These signs are usually noticed too late. Students in the UAE also have no single, easy tool that looks at both problems at once and guides them to help early on.
 
-**Why we built nafsi**
+Technical background
 
-Our senior project looked at anxiety and eating disorders and showed that the two are closely linked. When people are stressed, the way they eat often changes: some skip meals, some overeat, and some start to control food strictly.
+	•	GAD-7 (Spitzer et al., 2006): a seven-question survey that screens for anxiety.
+	•	EDE-Q (Fairburn & Beglin, 1994): a questionnaire about eating behavior over the past 28 days.
+	•	Heart rate variability (HRV) goes down when a person is stressed. Read alongside resting heart rate, sleep and breathing rate, it gives an idea of stress levels (Kim et al., 2018).
+	•	Apple HealthKit keeps data from the Apple Watch and iPhone. The app can read it once the user allows it.
+	•	Large language models like Google Gemini can turn a user's answers into a short summary in everyday language.
+	•	The Mifflin-St Jeor equation estimates how many calories a person needs per day based on age, sex, height, weight and activity.
 
-Most people only notice these signs late. Students in the UAE also lack one simple tool that checks both problems together and points them to help early.
+Theory / methods
 
-## Technical Background
+	•	Collect: heart rate, HRV, resting heart rate and breathing from the Apple Watch, and steps, sleep and weight from iPhone Health. Users can also take the GAD-7 and EDE-Q surveys. A meal log is included too.
+	•	Score: we average the survey answers. Watch data is turned into a stress percentage and a percentage for eating warning signs. Each one is placed at Low, Middle or High.
+	•	Support: every level comes with its own action, from a reminder, to calming tips and food ideas, to booking a specialist. If answers show risk, the app displays UAE help lines (999, 800-4673).
 
-- **GAD-7** (Spitzer et al., 2006): a 7-question screening survey for anxiety.
-- **EDE-Q** (Fairburn & Beglin, 1994): a questionnaire about eating habits over the last 28 days.
-- **Heart rate variability (HRV)** drops under stress, so together with resting heart rate, sleep and breathing rate it can show stress levels (Kim et al., 2018).
-- **Apple HealthKit** stores Apple Watch and iPhone data. The app reads it with the user's permission.
-- **Large language models** such as Google Gemini can turn answers into a short result in plain language.
-- **Mifflin-St Jeor equation**, used to estimate daily calorie needs from age, sex, height, weight and activity.
+Experimental setup
+We built the mobile app in Flutter and Dart. Firebase manages accounts and stores results for as many as six family profiles. The health package reads data from Apple HealthKit, and the Google Gemini API handles the AI assessment, recipe suggestions and daily needs.
 
-## Theory / Methods
+Google Maps and the phone's location find clinics close to the user (UAE only). EmailJS sends out booking confirmations. We first tested the screens in DartPad with a placeholder database, then on an iPhone connected to Apple Health.
 
-1. **Collect:** Apple Watch (heart rate, HRV, resting heart rate, breathing), iPhone Health (steps, sleep, weight) or the GAD-7 and EDE-Q surveys, plus a meal log.
-2. **Score:** Survey answers are averaged. Watch data becomes a stress percentage and an eating warning-sign percentage. Both map to Low, Middle or High.
-3. **Support:** Each level gets its own action: a reminder, calming tips and food ideas, or booking a specialist. Risky answers show UAE help lines (999, 800-4673).
+Results
+The final app works and includes surveys, an AI assessment, stress and eating charts from hourly up to monthly, booking based on severity, food suggestions, family profiles and daily athkar.
 
-## Setup, Experimental
+Warning levels
 
-The mobile app is built with **Flutter** and **Dart**. **Firebase** handles accounts and saves results for up to six family profiles. The **health** package reads Apple HealthKit, and the **Google Gemini API** runs the AI assessment, recipe ideas and daily needs.
+Level	Action
+Low	A short reminder to keep it up
+Middle	Breathing exercises, regular meals, calming recipes
+High	Reach out to someone and see the earliest available appointments
 
-**Google Maps** and the phone's location show clinics near the user (UAE only). **EmailJS** sends booking confirmations. We tested screens in DartPad with a stand-in database, then on iPhone with Apple Health.
+Appointment dates use colors: red dates are for High only, orange for Middle and High, and green for all users.
 
-## Results
+Food support
 
-A working app with surveys, an AI assessment, hourly to monthly stress and eating charts, booking by severity, food recommendations, family profiles and daily athkar.
+	•	Recipes from many countries, Emirati dishes included, chosen by weight, height and stress level, with the vitamins and minerals listed for each.
+	•	Gemini suggests new recipes and calculates daily calories and nutrients.
+	•	Users at high risk of an eating disorder are never shown calories or targets.
 
-**Warning levels**
+Discussion
+Limitations. Heart rate and stress tracking only work with an Apple Watch. If the user doesn't have one, the app falls back on iPhone steps and sleep along with the surveys.
 
-| Level | Action |
-|---|---|
-| Low | A small reminder to keep going |
-| Middle | Breathing, regular meals, calming recipes |
-| High | Talk to someone and get the closest appointment dates |
+We set the rules behind the stress and eating percentages ourselves, and they haven't been clinically tested yet.
 
-Dates are color-coded: red for High only, orange for Middle and High, green for everyone.
+The AI features need an internet connection and only work while Gemini is available.
 
-**Food support**
+Future work. Try the app with real students, fine-tune the score thresholds and bring in more partner clinics.
 
-- Recipes from around the world, including Emirati dishes, matched to weight, height and stress, each with vitamins and minerals.
-- Gemini suggests new recipes and works out daily calories and nutrients.
-- Users with a high eating-disorder risk never see calories or targets.
+Conclusion
+nafsi looks at stress and eating habits together in a single app. It can assess someone through a watch, a phone or a quick survey, gives a simple Low, Middle or High warning, and connects each level to suitable help, whether that's a small tip or an appointment with a specialist.
 
-## Discussions
-
-**Limits.** Heart rate and stress need an Apple Watch. Without one, the app uses iPhone steps and sleep plus the surveys.
-
-The stress and eating percentages use simple rules we designed. They have not been clinically validated yet.
-
-The AI features need the internet and depend on Gemini being available.
-
-**Next steps.** Test with real students, adjust the score limits, and add more partner clinics.
-
-## Conclusion
-
-nafsi brings stress and eating habits together in one app. It checks people with a watch, a phone or a short survey, gives a clear Low, Middle or High warning level, and links each level to the right kind of help, from a small tip to booking a specialist.
-
-The app shows warning signs only and is not a medical diagnosis.
-
----
-
-*nafsi · Empowering your journey to harmony and peace*
+The app only points out warning signs. It does not give a medical diagnosis.
